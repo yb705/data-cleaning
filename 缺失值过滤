@@ -1,0 +1,50 @@
+In [29]: a=pd.read_csv("examples\ex5.csv")
+In [30]: a
+Out[30]:
+  something  a   b     c   d message
+0       one  1   2   3.0   4     NaN
+1       two  5   6   NaN   8   world
+2     three  9  10  11.0  12     foo
+In [31]: a.isnull()
+Out[31]:
+   something      a      b      c      d  message
+0      False  False  False  False  False     True
+1      False  False  False   True  False    False
+2      False  False  False  False  False    False
+In [36]: a[b['message']==True]#通过bool值手动过滤缺失值
+Out[36]:
+  something  a  b    c  d message
+0       one  1  2  3.0  4     NaN
+In [37]: a.dropna()#通过方法dropna()直接过滤掉含有nan的行与列
+Out[37]:
+  something  a   b     c   d message
+2     three  9  10  11.0  12     foo
+from numpy import nan as na
+In [43]: a['message']=na
+In [44]: a
+Out[44]:
+  something  a   b     c   d  message
+0       one  1   2   3.0   4      NaN
+1       two  5   6   NaN   8      NaN
+2     three  9  10  11.0  12      NaN
+In [45]: a.loc['1']=na
+In [46]: a
+Out[46]:
+  something    a     b     c     d  message
+0       one  1.0   2.0   3.0   4.0      NaN
+1       two  5.0   6.0   NaN   8.0      NaN
+2     three  9.0  10.0  11.0  12.0      NaN
+1       NaN  NaN   NaN   NaN   NaN      NaN
+In [47]: a.dropna(how='all')#dropna()方法传递how参数，只过滤掉全是nan的列
+Out[47]:
+  something    a     b     c     d  message
+0       one  1.0   2.0   3.0   4.0      NaN
+1       two  5.0   6.0   NaN   8.0      NaN
+2     three  9.0  10.0  11.0  12.0      NaN
+In [48]: a.dropna(axis=1,how='all')#只过滤掉只过滤掉全是nan的行
+Out[48]:
+  something    a     b     c     d
+0       one  1.0   2.0   3.0   4.0
+1       two  5.0   6.0   NaN   8.0
+2     three  9.0  10.0  11.0  12.0
+1       NaN  NaN   NaN   NaN   NaN
