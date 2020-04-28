@@ -48,3 +48,14 @@ Out[48]:
 1       two  5.0   6.0   NaN   8.0
 2     three  9.0  10.0  11.0  12.0
 1       NaN  NaN   NaN   NaN   NaN
+In [52]: a.dropna()
+Out[52]:
+Empty DataFrame
+Columns: [something, a, b, c, d, message]
+Index: []
+In [49]: a.dropna(thresh=1)#通过传入参数thresh来保留一行观察值
+Out[49]:
+  something    a     b     c     d  message
+0       one  1.0   2.0   3.0   4.0      NaN
+1       two  5.0   6.0   NaN   8.0      NaN
+2     three  9.0  10.0  11.0  12.0      NaN
